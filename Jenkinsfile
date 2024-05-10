@@ -9,7 +9,7 @@ pipeline {
         stage('Build') {
             steps {
                 echo "Downloading the source code from $DIRECTORY_PATH"
-                echo "Compiling the source code and creating artifacts"
+                echo "Compiling the source code annd creating artifacts"
             }
         }
         stage('Test') {
