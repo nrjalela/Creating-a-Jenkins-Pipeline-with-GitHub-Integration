@@ -2,14 +2,14 @@ pipeline {
     agent any
     environment {
         DIRECTORY_PATH = "/dev"
-        TESTING_ENVIRONMENT = "Task5.1P"
+        TESTING_ENVIRONMENT = "Task6.1C"
         PRODUCTION_ENVIRONMENT = "NiharJ"
     }
     stages {
         stage('Build') {
             steps {
                 echo "Downloading the source code from $DIRECTORY_PATH"
-                echo "Compiling the source code annd creating artifacts"
+                echo "Compiling the source code and creating artifacts"
             }
         }
         stage('Test') {
