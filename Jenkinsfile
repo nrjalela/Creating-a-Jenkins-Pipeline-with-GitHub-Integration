@@ -1,6 +1,8 @@
 pipeline {
     agent any
-    environment {
+    triggers {
+        pollSCM('* * * * *') // Poll SCM every minute
+    }
         DIRECTORY_PATH = "/dev"
         TESTING_ENVIRONMENT = "Task6.1C"
         PRODUCTION_ENVIRONMENT = "NiharJ"
