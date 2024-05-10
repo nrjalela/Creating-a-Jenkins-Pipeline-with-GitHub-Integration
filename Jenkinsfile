@@ -37,7 +37,7 @@ pipeline {
             }
             post{
                 success{
-                    emailext attachLog: true, body: "Deployment Approved!", subject: "Deployment Approval", to: 's223040509@deakin.edu.au'
+                    emailext( body: "Deployment Approved!", subject: "Deployment Approval", to: 's223040509@deakin.edu.au', mimeType: 'text/html')
                 }
             }
         }
