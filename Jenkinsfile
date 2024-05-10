@@ -1,5 +1,5 @@
 pipeline {
-    agent any
+    agent any{
         DIRECTORY_PATH = "/dev"
         TESTING_ENVIRONMENT = "Task6.1C"
         PRODUCTION_ENVIRONMENT = "NiharJ"
