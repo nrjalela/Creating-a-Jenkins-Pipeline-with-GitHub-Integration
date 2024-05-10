@@ -1,17 +1,20 @@
 pipeline {
-    agent any{
-        DIRECTORY_PATH = "/dev"
-        TESTING_ENVIRONMENT = "Task6.1C"
-        PRODUCTION_ENVIRONMENT = "NiharJ"
-    }
+    agent any
+
     stages {
         stage('Build') {
+            environment{
+                DIRECTORY_PATH = '/dev'
+            }
             steps {
                 echo "Downloading the source code from $DIRECTORY_PATH"
                 echo "Compiling the source code and creating artifacts"
             }
         }
         stage('Test') {
+            environment{
+                TESTING_ENVIRONMENT = "Task6.1C"
+            }
             steps {
                 echo "Executing unit tests"
                 echo "Performing integration tests"
@@ -34,6 +37,9 @@ pipeline {
             }
         }
         stage('Deploy to Production') {
+            environment{
+                PRODUCTION_ENVIRONMENT = "NiharJ"
+            }
             steps {
                 echo "Deploying the code to $PRODUCTION_ENVIRONMENT environment"
             }
