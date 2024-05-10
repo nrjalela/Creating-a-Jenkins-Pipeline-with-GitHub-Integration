@@ -1,52 +1,77 @@
 pipeline {
     agent any
 
+    environment {
+        DIRECTORY_PATH = "/path/to/code"
+        TESTING_ENVIRONMENT = "test-env"
+        PRODUCTION_ENVIRONMENT = "production-env"
+    }
+
     stages {
         stage('Build') {
-            environment{
-                DIRECTORY_PATH = '/dev'
-            }
             steps {
-                echo "Downloading the source code from $DIRECTORY_PATH"
-                echo "Compiling the source code and creating artifacts"
+                echo "Fetching the source code from the directory path: ${env.DIRECTORY_PATH} using Maven"
+                echo "Compiling the code and generating necessary artifacts"
             }
         }
-        stage('Test') {
+
+        stage('Unit and Integration Tests') {
             steps {
-                echo "Executing unit tests"
-                echo "Performing integration tests"
+                echo "Running unit tests"
+                sleep(time: 10, unit: 'SECONDS')
+                echo "Running integration tests"
             }
         }
-        stage('Code Quality Check') {
+
+        stage('Code Analysis') {
             steps {
-                echo "Analyzing the code quality"
+                echo "Integrating a code analysis tool to analyze the code and ensure it meets industry standards using SonarQube"
+                // Add SonarQube analysis step here
             }
         }
-        stage('Deploy') {
-            environment{
-                TESTING_ENVIRONMENT = "Task6.1C"
-            }
+
+        stage('Security Scan') {
             steps {
-                echo "Deploying the application to $TESTING_ENVIRONMENT environment"
+                echo "Performing a security scan on the code using OWASP ZAP or another security scanning tool"
+                // Add security scanning step here
             }
         }
-        stage('Approval') {
+
+        stage('Deploy to Staging') {
             steps {
-                echo "Waiting for manual approval..."
-                sleep 10
+                echo "Deploying the application to a staging server in AWS Elastic Beanstalk"
+                // Add deployment to staging step here
             }
-            post{
-                success{
-                    emailext( body: "Deployment Approved!", subject: "Deployment Approval", to: 'nrjalela@gmail.com', mimeType: 'text/html')
+        }
+
+        stage('Integration Tests on Staging') {
+            steps {
+                script {
+                    echo "Running integration tests on the staging environment to ensure the application functions as expected in a production-like environment"
+                    // Create a custom message file
+                    writeFile file: 'custom_message.txt', text: 'The Jenkins pipeline has completed successfully.'
+                }
+            }
+            post {
+                success {
+                    // Archive the custom message file as an artifact
+                    archiveArtifacts artifacts: 'custom_message.txt', allowEmptyArchive: true
+
+                    // Send notification email for successful pipeline
+                    emailext (
+                        subject: "Pipeline Status: SUCCESS",
+                        body: "The Jenkins pipeline has completed successfully.",
+                        to: "luvghodasara000@gmail.com",
+                        mimeType: 'text/html'
+                    )
                 }
             }
         }
+
         stage('Deploy to Production') {
-            environment{
-                PRODUCTION_ENVIRONMENT = "NiharJ"
-            }
             steps {
-                echo "Deploying the code to $PRODUCTION_ENVIRONMENT environment"
+                echo "Deploying the code to production environment: ${env.PRODUCTION_ENVIRONMENT}"
+                // Add deployment to production step here
             }
         }
     }
