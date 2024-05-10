@@ -12,9 +12,6 @@ pipeline {
             }
         }
         stage('Test') {
-            environment{
-                TESTING_ENVIRONMENT = "Task6.1C"
-            }
             steps {
                 echo "Executing unit tests"
                 echo "Performing integration tests"
@@ -26,6 +23,9 @@ pipeline {
             }
         }
         stage('Deploy') {
+            environment{
+                TESTING_ENVIRONMENT = "Task6.1C"
+            }
             steps {
                 echo "Deploying the application to $TESTING_ENVIRONMENT environment"
             }
