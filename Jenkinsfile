@@ -35,10 +35,10 @@ pipeline {
                 echo "Waiting for manual approval..."
                 sleep 10
             }
-        }
-        post{
-            success{
-                emailext attachLog: true, body: "Deployment Approved!", subject: "Deployment Approval", to: 's223040509@deakin.edu.au'
+            post{
+                success{
+                    emailext attachLog: true, body: "Deployment Approved!", subject: "Deployment Approval", to: 's223040509@deakin.edu.au'
+                }
             }
         }
         stage('Deploy to Production') {
