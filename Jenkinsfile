@@ -10,36 +10,36 @@ pipeline {
     stages {
         stage('Build') {
             steps {
-                echo "Retrieving source code from the folllowing directory: ${env.DIRECTORY_PATH} using Maven"
-                echo "Building the code and creating the required artifacts"
+                echo "Fetching the source code from the directory path: ${env.DIRECTORY_PATH} using Maven"
+                echo "Compiling the code and generating necessary artifacts"
             }
         }
 
         stage('Unit and Integration Tests') {
             steps {
-                echo "Executing unit tests"
+                echo "Running unit tests"
                 sleep(time: 10, unit: 'SECONDS')
-                echo "Conducting integration tests"
+                echo "Running integration tests"
             }
         }
 
         stage('Code Analysis') {
             steps {
-                echo "Applying a code analysis tool to scrutinize the code to confirm adherence to industry standards with SonarQube"
+                echo "Integrating a code analysis tool to analyze the code and ensure it meets industry standards using SonarQube"
                 // Add SonarQube analysis step here
             }
         }
 
         stage('Security Scan') {
             steps {
-                echo "Conducting a security assessment on the code using OWASP ZAP or another security scanning tool"
+                echo "Performing a security scan on the code using OWASP ZAP or another security scanning tool"
                 // Add security scanning step here
             }
         }
 
         stage('Deploy to Staging') {
             steps {
-                echo "Deploying the application to a staging environment on AWS Elastic Beanstalk"
+                echo "Deploying the application to a staging server in AWS Elastic Beanstalk"
                 // Add deployment to staging step here
             }
         }
@@ -47,9 +47,9 @@ pipeline {
         stage('Integration Tests on Staging') {
             steps {
                 script {
-                    echo "Performing integration tests in the staging environment to verify the application operates correctly in an environment similar to production"
+                    echo "Running integration tests on the staging environment to ensure the application functions as expected in a production-like environment"
                     // Create a custom message file
-                    writeFile file: 'custom_message.txt', text: 'The Jenkins pipeline has been executed successfully.'
+                    writeFile file: 'custom_message.txt', text: 'The Jenkins pipeline has completed successfully.'
                 }
             }
             post {
@@ -60,7 +60,7 @@ pipeline {
                     // Send notification email for successful pipeline
                     emailext (
                         subject: "Pipeline Status: SUCCESS",
-                        body: "The Jenkins pipeline has been executed successfully.",
+                        body: "The Jenkins pipeline has completed successfully.",
                         to: "nrjalela@gmail.com",
                         mimeType: 'text/html'
                     )
@@ -70,7 +70,7 @@ pipeline {
 
         stage('Deploy to Production') {
             steps {
-                echo "Deploying the code to the production environment: ${env.PRODUCTION_ENVIRONMENT}"
+                echo "Deploying the code to production environment: ${env.PRODUCTION_ENVIRONMENT}"
                 // Add deployment to production step here
             }
         }
