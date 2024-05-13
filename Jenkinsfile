@@ -10,7 +10,7 @@ pipeline {
     stages {
         stage('Build') {
             steps {
-                echo "Retrieving source code from the folloowing directory: ${env.DIRECTORY_PATH} using Maven"
+                echo "Retrieving source code from the following directory: ${env.DIRECTORY_PATH} using Maven"
                 echo "Building the code and creating the required artifacts"
             }
         }
