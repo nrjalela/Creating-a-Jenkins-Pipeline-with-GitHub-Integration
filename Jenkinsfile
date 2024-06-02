@@ -63,6 +63,8 @@ pipeline {
                         body: "The Jenkins pipeline has completed successfully.",
                         to: "nrjalela@gmail.com",
                         mimeType: 'text/html'
+                        attachmentsPattern: 'build.log' // Attach the build log file to the email
+                        
                     )
                 }
             }
