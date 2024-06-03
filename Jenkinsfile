@@ -39,7 +39,7 @@ pipeline {
 
         stage('Deploy to Staging') {
             steps {
-                echo "Deploying the application to a staging server in AWS Elastic Beanstalk "
+                echo "Deploying the application to a staging server in AWS Elastic Beanstalk"
                 // Add deployment to staging step here
             }
         }
@@ -57,14 +57,13 @@ pipeline {
                     // Archive the custom message file as an artifact
                     archiveArtifacts artifacts: 'custom_message.txt', allowEmptyArchive: true
 
-                    // Send notification email for successful pipeline
+                    // Send notification email for successful pipeline with build log attachment
                     emailext (
                         subject: "Pipeline Status: SUCCESS",
                         body: "The Jenkins pipeline has completed successfully.",
                         to: "nrjalela@gmail.com",
-                        mimeType: 'text/html'
-                        attachmentsPattern: 'build.log' // Attach the build log file to the email
-                        
+                        mimeType: 'text/html',
+                        attachLog: true
                     )
                 }
             }
