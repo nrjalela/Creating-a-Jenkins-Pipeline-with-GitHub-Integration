@@ -39,7 +39,7 @@ pipeline {
 
         stage('Deploy to Staging') {
             steps {
-                echo "Deploying the application to a staging server in AWS Elastic Beanstalk"
+                echo "Deploying the application to a staging server in AWS Elastic Beanstalk "
                 // Add deployment to staging step here
             }
         }
